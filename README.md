@@ -22,7 +22,7 @@ See [this section](#stable-diffusion-v1) below and the [model card](https://hugg
 
 ## Removing censorship inside Colab solution
 Before loading the pipelines run:
-# Remove censorship
+&#35; Remove censorship
 !sed -i 's/x_checked_image, has_nsfw_concept = check_safety(x_samples_ddim)/x_checked_image = x_samples_ddim/g' /content/stable-diffusion/scripts/txt2img.py
 !sed -i 's/safety_model_id = "CompVis/stable-diffusion-safety-checker"/#safety_model_id = "CompVis/stable-diffusion-safety-checker"/g' /content/stable-diffusion/scripts/txt2img.py
 !sed -i 's/safety_feature_extractor = AutoFeatureExtractor.from_pretrained(safety_model_id)/#safety_feature_extractor = AutoFeatureExtractor.from_pretrained(safety_model_id)/g'  /content/stable-diffusion/scripts/txt2img.py
