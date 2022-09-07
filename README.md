@@ -19,7 +19,16 @@ this model uses a frozen CLIP ViT-L/14 text encoder to condition the model on te
 With its 860M UNet and 123M text encoder, the model is relatively lightweight and runs on a GPU with at least 10GB VRAM.
 See [this section](#stable-diffusion-v1) below and the [model card](https://huggingface.co/CompVis/stable-diffusion).
 
-  
+
+## Removing censorship inside Colab solution
+Before loading the pipelines run:
+# Remove censorship
+!sed -i 's/x_checked_image, has_nsfw_concept = check_safety(x_samples_ddim)/x_checked_image = x_samples_ddim/g' /content/stable-diffusion/scripts/txt2img.py
+!sed -i 's/safety_model_id = "CompVis/stable-diffusion-safety-checker"/#safety_model_id = "CompVis/stable-diffusion-safety-checker"/g' /content/stable-diffusion/scripts/txt2img.py
+!sed -i 's/safety_feature_extractor = AutoFeatureExtractor.from_pretrained(safety_model_id)/#safety_feature_extractor = AutoFeatureExtractor.from_pretrained(safety_model_id)/g'  /content/stable-diffusion/scripts/txt2img.py
+!sed -i 's/safety_checker = StableDiffusionSafetyChecker.from_pretrained(safety_model_id)/#safety_checker = StableDiffusionSafetyChecker.from_pretrained(safety_model_id)/g'  /content/stable-diffusion/scripts/txt2img.py
+
+
 ## Requirements
 A suitable [conda](https://conda.io/) environment named `ldm` can be created
 and activated with:
